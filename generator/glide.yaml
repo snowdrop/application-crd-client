@@ -1,0 +1,4 @@
+package: github.com/snowdrop/application-crd-client/generator
+import:
+- package: github.com/kubernetes-sigs/application
+  version: 868215a1afc717d658f050ccdb6f32a43d99284e
