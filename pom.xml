@@ -25,7 +25,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.snowdrop</groupId>
-    <artifactId>applicationcrd-java-api-project</artifactId>
+    <artifactId>application-crd-project</artifactId>
     <packaging>pom</packaging>
     <version>1.0.4-SNAPSHOT</version>
     <name>Snowdrop :: Application CRD</name>
@@ -131,7 +131,7 @@
           <!-- Internal Dependencies -->
           <dependency>
             <groupId>me.snowdrop</groupId>
-            <artifactId>applicationcrd-model</artifactId>
+            <artifactId>application-crd-model</artifactId>
             <version>${project.version}</version>
           </dependency>
           <dependency>
@@ -382,14 +382,14 @@
                 <configuration>
                     <boms>
                         <bom>
-                            <artifactId>applicationcrd-java-api-bom</artifactId>
+                            <artifactId>application-crd-java-api-bom</artifactId>
                             <name>Snowdrop :: Application CRD::Bom</name>
                             <properties>
                                 <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
                             </properties>
                         </bom>
                         <bom>
-                            <artifactId>applicationcrd-java-api-bom-with-deps</artifactId>
+                            <artifactId>application-crd-java-api-bom-with-deps</artifactId>
                             <name>Snowdrop :: Application CRD::Bom with Dependencies</name>
                             <dependencies>
                                 <includes>
