@@ -25,7 +25,7 @@ public class AppCrdResourceMappingProvider implements KubernetesResourceMappingP
     public final Map<String, Class<? extends KubernetesResource>> mappings = new HashMap<>();
 
     public AppCrdResourceMappingProvider() {
-        mappings.put("app/v1beta1#Application", Application.class);
+        mappings.put("application.k8s.io/v1beta1#Application", Application.class);
     }
      
     public Map<String, Class<? extends KubernetesResource>> getMappings() {
