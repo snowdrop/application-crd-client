@@ -36,7 +36,7 @@ type Schema struct {
 
 func main() {
 	packages := []schemagen.PackageDescriptor{
-		{"github.com/kubernetes-sigs/application/pkg/apis/app/v1beta1", "application.k8s.io", "me.snowdrop.applicationcrd.api.model", "applicationcrd_"},
+		{"github.com/kubernetes-sigs/application/pkg/apis/app/v1beta1", "app.k8s.io", "me.snowdrop.applicationcrd.api.model", "applicationcrd_"},
 		{"k8s.io/apimachinery/pkg/apis/meta/v1", "", "io.fabric8.kubernetes.api.model", "kubernetes_apimachinery_"},
 	}
 

@@ -9,7 +9,7 @@
         "apiVersion": {
           "type": "string",
           "description": "",
-          "default": "application.k8s.io/v1beta1",
+          "default": "app.k8s.io/v1beta1",
           "required": true
         },
         "kind": {
@@ -44,7 +44,7 @@
         "apiVersion": {
           "type": "string",
           "description": "",
-          "default": "application.k8s.io/v1beta1",
+          "default": "app.k8s.io/v1beta1",
           "required": true
         },
         "items": {
@@ -210,7 +210,7 @@
         "apiVersion": {
           "type": "string",
           "description": "",
-          "default": "application.k8s.io/v1beta1",
+          "default": "app.k8s.io/v1beta1",
           "required": true
         },
         "fieldPath": {
@@ -433,7 +433,7 @@
         "apiVersion": {
           "type": "string",
           "description": "",
-          "default": "application.k8s.io/v1beta1",
+          "default": "app.k8s.io/v1beta1",
           "required": true
         },
         "fieldPath": {
@@ -534,7 +534,7 @@
         "apiVersion": {
           "type": "string",
           "description": "",
-          "default": "application.k8s.io/v1beta1",
+          "default": "app.k8s.io/v1beta1",
           "required": true
         },
         "fieldPath": {
@@ -581,7 +581,7 @@
         "apiVersion": {
           "type": "string",
           "description": "",
-          "default": "application.k8s.io/v1beta1",
+          "default": "app.k8s.io/v1beta1",
           "required": true
         },
         "fieldPath": {
