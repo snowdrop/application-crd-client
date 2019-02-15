@@ -19,6 +19,7 @@ import io.fabric8.kubernetes.client.Config;
 import io.fabric8.kubernetes.client.dsl.NonNamespaceOperation;
 import io.fabric8.kubernetes.client.dsl.Resource;
 import io.fabric8.kubernetes.client.dsl.base.HasMetadataOperation;
+import me.snowdrop.applicationcrd.api.client.util.ApiVersionUtil;
 import me.snowdrop.applicationcrd.api.model.DoneableApplication;
 import me.snowdrop.applicationcrd.api.model.Application;
 import me.snowdrop.applicationcrd.api.model.ApplicationList;
@@ -38,6 +39,11 @@ public class ApplicationOperationImpl extends HasMetadataOperation<Application, 
         super(client, config, apiGroup, apiVersion, "applications", namespace, name, cascading, item, resourceVersion, reloadingFromServer, gracePeriodSeconds, labels, labelsNot, labelsIn, labelsNotIn, fields);
     }
 
+    //Added for compatibility
+    public ApplicationOperationImpl(OkHttpClient client, Config config, String apiVersion, String namespace, String name, Boolean cascading, Application item, String resourceVersion, Boolean reloadingFromServer, long gracePeriodSeconds, Map<String, String> labels, Map<String, String> labelsNot, Map<String, String[]> labelsIn, Map<String, String[]> labelsNotIn, Map<String, String> fields) {
+        super(client, config, ApiVersionUtil.apiGroup(item, apiVersion), ApiVersionUtil.apiVersion(item, apiVersion), "applications", namespace, name, cascading, item, resourceVersion, reloadingFromServer, gracePeriodSeconds, labels, labelsNot, labelsIn, labelsNotIn, fields);
+    }
+
     @Override
     public NonNamespaceOperation<Application, ApplicationList, DoneableApplication, Resource<Application, DoneableApplication>> inNamespace(String namespace) {
         return new ApplicationOperationImpl(client, config, apiGroup, apiVersion, namespace, name, isCascading(), getItem(), getResourceVersion(), isReloadingFromServer(), getGracePeriodSeconds(), getLabels(), getLabelsNot(), getLabelsIn(), getLabelsNotIn(), getFields());
@@ -52,4 +58,5 @@ public class ApplicationOperationImpl extends HasMetadataOperation<Application, 
     public boolean isResourceNamespaced() {
         return true;
     }
+
 }
