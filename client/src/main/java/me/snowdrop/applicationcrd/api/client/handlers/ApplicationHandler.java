@@ -21,33 +21,38 @@ import io.fabric8.kubernetes.client.ResourceHandler;
 import io.fabric8.kubernetes.client.Watch;
 
 import io.fabric8.kubernetes.client.Watcher;
-import me.snowdrop.applicationcrd.api.client.internal.ApplicationOperationImpl;
+import me.snowdrop.applicationcrd.api.client.internal.ApplicationOperationsImpl;
 import me.snowdrop.applicationcrd.api.model.Application;
 import me.snowdrop.applicationcrd.api.model.ApplicationBuilder;
 import okhttp3.OkHttpClient;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 public class ApplicationHandler implements ResourceHandler<Application, ApplicationBuilder> {
-
   @Override
   public String getKind() {
     return Application.class.getSimpleName();
   }
 
   @Override
+  public String getApiVersion() {
+        return "v1";
+      }
+
+  @Override
   public Application create(OkHttpClient client, Config config, String namespace, Application item) {
-    return new ApplicationOperationImpl(client, config, "servicecatalog.k8s.io", "v1beta1", namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>()).create();
+    return new ApplicationOperationsImpl(client, config).withItem(item).inNamespace(namespace).create();
   }
 
   @Override
   public Application replace(OkHttpClient client, Config config, String namespace, Application item) {
-    return new ApplicationOperationImpl(client, config, "servicecatalog.k8s.io", "v1beta1", namespace, null, true, item, null, true, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>()).replace(item);
+    return new ApplicationOperationsImpl(client, config).withItem(item).inNamespace(namespace).withName(item.getMetadata().getName()).replace(item);
   }
 
   @Override
   public Application reload(OkHttpClient client, Config config, String namespace, Application item) {
-    return new ApplicationOperationImpl(client, config, "servicecatalog.k8s.io", "v1beta1", namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>()).fromServer().get();
+    return new ApplicationOperationsImpl(client, config).withItem(item).inNamespace(namespace).withName(item.getMetadata().getName()).fromServer().get();
   }
 
   @Override
@@ -57,21 +62,26 @@ public class ApplicationHandler implements ResourceHandler<Application, Applicat
 
   @Override
   public Boolean delete(OkHttpClient client, Config config, String namespace, Application item) {
-    return new ApplicationOperationImpl(client, config, "servicecatalog.k8s.io", "v1beta1", namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>()).delete(item);
+    return new ApplicationOperationsImpl(client, config).withItem(item).inNamespace(namespace).delete(item);
   }
 
   @Override
   public Watch watch(OkHttpClient client, Config config, String namespace, Application item, Watcher<Application> watcher) {
-    return new ApplicationOperationImpl(client, config, "servicecatalog.k8s.io", "v1beta1", namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>()).watch(watcher);
+    return new ApplicationOperationsImpl(client, config).withItem(item).inNamespace(namespace).withName(item.getMetadata().getName()).watch(watcher);
   }
 
   @Override
   public Watch watch(OkHttpClient client, Config config, String namespace, Application item, String resourceVersion, Watcher<Application> watcher) {
-    return new ApplicationOperationImpl(client, config, "servicecatalog.k8s.io", "v1beta1", namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>()).watch(resourceVersion, watcher);
+    return new ApplicationOperationsImpl(client, config).withItem(item).inNamespace(namespace).withName(item.getMetadata().getName()).watch(resourceVersion, watcher);
   }
 
   @Override
   public Application waitUntilReady(OkHttpClient client, Config config, String namespace, Application item, long amount, TimeUnit timeUnit) throws InterruptedException {
-    return new ApplicationOperationImpl(client, config, "servicecatalog.k8s.io", "v1beta1", namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>()).waitUntilReady(amount, timeUnit);
+    return new ApplicationOperationsImpl(client, config).withItem(item).inNamespace(namespace).withName(item.getMetadata().getName()).waitUntilReady(amount, timeUnit);
+  }
+
+  @Override
+  public Application waitUntilCondition(OkHttpClient client, Config config, String namespace, Application item, Predicate<Application> condition, long amount, TimeUnit timeUnit) throws InterruptedException {
+    return new ApplicationOperationsImpl(client, config).withItem(item).inNamespace(namespace).withName(item.getMetadata().getName()).waitUntilCondition(condition, amount, timeUnit);
   }
 }
