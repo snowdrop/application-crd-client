@@ -23,7 +23,7 @@ import io.fabric8.kubernetes.client.dsl.Resource;
 import me.snowdrop.applicationcrd.api.model.Application;
 import io.fabric8.kubernetes.client.BaseClient;
 import io.fabric8.kubernetes.client.Config;
-import me.snowdrop.applicationcrd.api.client.internal.ApplicationOperationImpl;
+import me.snowdrop.applicationcrd.api.client.internal.ApplicationOperationsImpl;
 import me.snowdrop.applicationcrd.api.model.ApplicationList;
 import me.snowdrop.applicationcrd.api.model.DoneableApplication;
 import okhttp3.OkHttpClient;
@@ -44,7 +44,7 @@ public class DefaultApplicationClient extends BaseClient implements NamespacedAp
     }
 
    public NonNamespaceOperation<Application, ApplicationList, DoneableApplication, Resource<Application, DoneableApplication>> applications(){
-        return new ApplicationOperationImpl(this.getHttpClient(), this.getConfiguration());
+        return new ApplicationOperationsImpl(this.getHttpClient(), this.getConfiguration());
     }
 
     @Override
